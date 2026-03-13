@@ -1,11 +1,8 @@
 "use client";
-import React from "react";
 import Link from "next/link";
-import { useState } from "react";
 import { useSidebar } from "@/lib/sidebarContext";
 
 import {
-  PanelRightClose,
   PanelRightOpen,
   House,
   School,
@@ -18,7 +15,7 @@ const SideNavbar = () => {
   const { extended, toggleSidebar } = useSidebar(); // Access the sidebar state and toggle function from context
 
   return (
-    <aside className="fixed top-0 z-50">
+    <aside className="hidden sm:block fixed top-0 z-50">
       <nav
         className={`${extended ? "w-52" : "w-16"} h-screen bg-background border-r-2 border-border p-4 transition-all duration-300`}
       >

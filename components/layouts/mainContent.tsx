@@ -1,14 +1,26 @@
 "use client";
 import { useSidebar } from "@/lib/sidebarContext";
-import { ReactNode } from "react";
+import { ReactNode, useState, useEffect } from "react";
 
 export default function MainContent({ children }: { children: ReactNode }) {
   const { extended } = useSidebar();
+  const [screenWidth, setScreenWidth] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <div 
+    <div
       className={`overflow-hidden xs:overflow-visible transition-all duration-300 p-4 ${
-        extended ? "ml-52" : "ml-16"
+        screenWidth < 640
+          ? "ml-0" // No margin on mobile
+          : extended
+            ? "ml-52"
+            : "ml-16"
       }`}
     >
       {children}
