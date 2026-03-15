@@ -1,9 +1,9 @@
 import { BookOpen } from "lucide-react";
+import { Suspense } from "react";
 import Link from "next/link";
 import SignUpForm from "@/components/signUpForm";
 
 const SignUp = () => {
-
   return (
     <div className=" flex flex-col items-center justify-center px-4 py-8">
       <div className="w-full max-w-md">
@@ -21,7 +21,15 @@ const SignUp = () => {
           </h1>
 
           {/* Form */}
+          <Suspense
+            fallback={
+              <div className="text-center text-sm text-muted-foreground">
+                Loading form...
+              </div>
+            }
+          >
             <SignUpForm />
+          </Suspense>
           {/* Sign In Link */}
           <div className="mt-6 text-center text-sm text-muted-foreground">
             Already have an account?{" "}
