@@ -35,7 +35,7 @@ export default function Home() {
               <ArrowRight className=" ml-2" />
             </Button>
           </Link>
-          <Link href="/auth/sign-up?role=instructor">
+          <Link href="/auth/sign-up?role=teach">
             <Button className="px-4 py-5 rounded-[8px] border-2 border-border cursor-pointer bg-secondary/50 text-foreground hover:text-accent-foreground hover:bg-accent transition-colors duration-200">
               Start Teaching
             </Button>
@@ -113,7 +113,7 @@ export default function Home() {
             <p className="text-muted-foreground">
               Be the first instructor to create a course!
             </p>
-            <Link href={"/auth/sign-up?role=instructor"}>
+            <Link href={"/auth/sign-up?role=teach"}>
               <Button className="text-primary-foreground bg-primary hover:bg-primary/80 rounded-[8px] transition-colors duration-200 cursor-pointer">
                 Start Teaching
               </Button>
@@ -127,7 +127,7 @@ export default function Home() {
           Join thousands of learners. Gain new skills, earn certificates, and
           advance <br /> your career.
         </p>
-        <Link href={"/auth/sign-up?role=learner"} className="mt-4">
+        <Link href={"/auth/sign-up?role=learn"} className="mt-4">
           <Button className="bg-background text-foreground rounded-[8px] border-2 border-border hover:bg-accent hover:text-accent-foreground hover:border-accent p-4 transition-colors duration-200 cursor-pointer">
             Get Started for Free
           </Button>
