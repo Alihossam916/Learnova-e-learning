@@ -16,7 +16,7 @@ const Footer = () => {
               <Link href="/">Learnova</Link>
             </h3>
           </div>
-          <p className="text-sm text-secondary-foreground leading-relaxed">
+          <p className="text-sm text-muted-foreground leading-relaxed">
             Master new skills with expert-led courses. Join thousands of
             learners worldwide.
           </p>
@@ -29,7 +29,7 @@ const Footer = () => {
             <li>
               <Link
                 href="/courses"
-                className="text-sm text-secondary-foreground cursor-pointer hover:text-primary transition-colors duration-200"
+                className="text-sm text-muted-foreground cursor-pointer hover:text-primary transition-colors duration-200"
               >
                 Browse Courses
               </Link>
@@ -37,7 +37,7 @@ const Footer = () => {
             <li>
               <Link
                 href="/auth/sign-up?role=student"
-                className="text-sm text-secondary-foreground cursor-pointer hover:text-primary transition-colors duration-200"
+                className="text-sm text-muted-foreground cursor-pointer hover:text-primary transition-colors duration-200"
               >
                 Become a Student
               </Link>
@@ -45,7 +45,7 @@ const Footer = () => {
             <li>
               <Link
                 href="/auth/sign-up?role=instructor"
-                className="text-sm text-secondary-foreground cursor-pointer hover:text-primary transition-colors duration-200"
+                className="text-sm text-muted-foreground cursor-pointer hover:text-primary transition-colors duration-200"
               >
                 Teach on Learnova
               </Link>
@@ -60,7 +60,7 @@ const Footer = () => {
             <li>
               <Link
                 href="/courses?category=web-development"
-                className="text-sm text-secondary-foreground hover:text-primary transition-colors duration-200"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
               >
                 Web Development
               </Link>
@@ -68,7 +68,7 @@ const Footer = () => {
             <li>
               <Link
                 href="/courses?category=data-science"
-                className="text-sm text-secondary-foreground hover:text-primary transition-colors duration-200"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
               >
                 Data Science
               </Link>
@@ -76,7 +76,7 @@ const Footer = () => {
             <li>
               <Link
                 href="/courses?category=design"
-                className="text-sm text-secondary-foreground hover:text-primary transition-colors duration-200"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
               >
                 Design
               </Link>
@@ -88,13 +88,13 @@ const Footer = () => {
         <div>
           <h4 className="font-semibold text-foreground mb-4">Support</h4>
           <ul className="space-y-2">
-            <li className="text-sm text-secondary-foreground hover:text-primary transition-colors">
+            <li className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Help Center
             </li>
-            <li className="text-sm text-secondary-foreground hover:text-primary transition-colors">
+            <li className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Privacy Policy
             </li>
-            <li className="text-sm text-secondary-foreground hover:text-primary transition-colors">
+            <li className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Terms of Service
             </li>
           </ul>
@@ -103,8 +103,8 @@ const Footer = () => {
 
       {/* Copyright */}
       <div className="mt-12 pt-8 border-t border-border">
-        <p className="text-center text-sm text-secondary-foreground">
-          &copy; {new Date().getFullYear()} Learnova. All rights reserved.
+        <p className="text-center text-sm text-muted-foreground">
+          &copy; 2026 Learnova. All rights reserved.
         </p>
       </div>
     </footer>
