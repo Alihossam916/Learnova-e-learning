@@ -30,13 +30,13 @@ export default function Home() {
         </p>
         <div className="flex flex-col xs:flex-row items-center gap-4">
           <Link href="/courses">
-            <Button className="px-4 py-5 rounded-[8px] cursor-pointer bg-primary text-primary-foreground hover:bg-primary/80 transition-colors duration-200">
+            <Button className="px-4 py-5 cursor-pointer bg-primary text-primary-foreground hover:bg-primary/80 transition-colors duration-200">
               Browse Courses
               <ArrowRight className=" ml-2" />
             </Button>
           </Link>
           <Link href="/auth/sign-up?role=teach">
-            <Button className="px-4 py-5 rounded-[8px] border-2 border-border cursor-pointer bg-secondary/50 text-foreground hover:text-accent-foreground hover:bg-accent transition-colors duration-200">
+            <Button className="px-4 py-5 border-2 border-border cursor-pointer bg-secondary/50 text-foreground hover:text-accent-foreground hover:bg-accent transition-colors duration-200">
               Start Teaching
             </Button>
           </Link>
@@ -101,20 +101,20 @@ export default function Home() {
             </p>
           </div>
           <Link href={"/courses"}>
-            <Button className="p-4 bg-background text-foreground border-2 border-border hover:bg-accent hover:text-accent-foreground rounded-[8px] cursor-pointer">
+            <Button className="p-4 bg-background text-foreground border-2 border-border hover:bg-accent hover:text-accent-foreground cursor-pointer">
               View All
             </Button>
           </Link>
         </div>
         <div className="border-2 border-border border-dotted py-16 rounded-sm">
           <div className="flex flex-col items-center gap-2">
-            <BookOpen className="size-12 text-secondary" />
+            <BookOpen className="size-12 text-muted-foreground" />
             <h3 className="text-foreground font-bold">No courses yet</h3>
             <p className="text-muted-foreground">
               Be the first instructor to create a course!
             </p>
             <Link href={"/auth/sign-up?role=teach"}>
-              <Button className="text-primary-foreground bg-primary hover:bg-primary/80 rounded-[8px] transition-colors duration-200 cursor-pointer">
+              <Button className="text-primary-foreground bg-primary hover:bg-primary/80 transition-colors duration-200 cursor-pointer">
                 Start Teaching
               </Button>
             </Link>
@@ -128,7 +128,7 @@ export default function Home() {
           advance <br /> your career.
         </p>
         <Link href={"/auth/sign-up?role=learn"} className="mt-4">
-          <Button className="bg-background text-foreground rounded-[8px] border-2 border-border hover:bg-accent hover:text-accent-foreground hover:border-accent p-4 transition-colors duration-200 cursor-pointer">
+          <Button className="bg-background text-foreground border-2 border-border hover:bg-accent hover:text-accent-foreground hover:border-accent p-4 transition-colors duration-200 cursor-pointer">
             Get Started for Free
           </Button>
         </Link>
