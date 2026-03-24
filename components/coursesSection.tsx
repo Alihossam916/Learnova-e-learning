@@ -19,18 +19,45 @@ interface CourseProps {
   quizzes: object[];
 }
 
-const CoursesSection = async () => {
+type CoursesSectionProps = {
+  params: Promise<{ category: string; search: string }>;
+};
+
+const normalizeCategory = (value: string) =>
+  decodeURIComponent(value)
+    .trim()
+    .toLowerCase()
+    .replace(/[-_\s]+/g, " ");
+
+const CoursesSection = async ({ params }: CoursesSectionProps) => {
+  const { category, search } = (await params) || {
+    category: "all",
+    search: "",
+  };
+  const normalizedCategory = normalizeCategory(category);
+
   const data = await fetch("https://dummyjson.com/c/68d1-ae2a-4947-9c55", {
     next: { revalidate: 120 },
   });
   const courses = await data.json();
 
+  const filteredCourses = courses.filter((course: CourseProps) => {
+    const matchesCategory =
+      normalizedCategory === "all" ||
+      course.category.toLowerCase() === normalizedCategory;
+    const matchesSearch =
+      search === "" ||
+      course.title.toLowerCase().includes(search.toLowerCase()) ||
+      course.description.toLowerCase().includes(search.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
   return (
     <section className="my-12">
-      {courses ? (
+      {filteredCourses.length > 0 ? (
         <div className="flex flex-wrap items-center justify-center gap-8 last:mr-auto">
           <Suspense fallback={<Spinner className="size-12" />}>
-            {courses.map((course: CourseProps) => {
+            {filteredCourses.map((course: CourseProps) => {
               return <CoursesCard course={course} key={course.id} />;
             })}
           </Suspense>
