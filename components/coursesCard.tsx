@@ -36,7 +36,6 @@ interface CourseProps {
 }
 
 export function CoursesCard({ course }: CourseProps) {
-  console.log(course);
 
   return (
     <Link href={`/courses/${course.id}`} className="relative w-full max-w-sm hover:scale-105 hover:drop-shadow-2xl transition-all duration-200">
