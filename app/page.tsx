@@ -6,8 +6,6 @@ import { Button } from "@/components/ui/button";
 import FeaturedCourses from "@/components/featuredCourses";
 // icons
 import { TrendingUp, ArrowRight, BookOpen, Users, Award } from "lucide-react";
-import { Suspense } from "react";
-import { Spinner } from "@/components/ui/spinner";
 
 export default function Home() {
   const categories = [
@@ -97,10 +95,7 @@ export default function Home() {
         </div>
       </section>
       {/* featured courses */}
-      <Suspense fallback={<Spinner className="size-12" />}>
         <FeaturedCourses />
-      </Suspense>
-
       <section className="flex flex-col items-center justify-center gap-4 bg-primary text-primary-foreground w-full py-16 ">
         <h2 className="text-xl xs:text-2xl font-bold">
           Ready to Start Learning?

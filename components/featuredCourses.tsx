@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { CoursesCard } from "./coursesCard";
 // icons
 import { BookOpen } from "lucide-react";
+import { Suspense } from "react";
+import { Spinner } from "./ui/spinner";
 
 interface CourseProps {
   id: number;
@@ -45,9 +47,11 @@ const FeaturedCourses = async () => {
       </div>
       {featuredCourses ? (
         <div className="flex flex-wrap items-center justify-center gap-8 last:mr-auto">
-          {featuredCourses.map((course: CourseProps) => {
-            return <CoursesCard course={course} key={course.id} />;
-          })}
+          <Suspense fallback={<Spinner className="size-12" />}>
+            {featuredCourses.map((course: CourseProps) => {
+              return <CoursesCard course={course} key={course.id} />;
+            })}
+          </Suspense>
         </div>
       ) : (
         <div className="border-2 border-border border-dotted py-16 rounded-sm">
