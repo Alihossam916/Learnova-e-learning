@@ -1,6 +1,9 @@
 import Link from "next/link";
+// api
+import { getCourses } from "@/lib/api";
 // components
 import { Button } from "@/components/ui/button";
+import FeaturedCourses from "@/components/featuredCourses";
 // icons
 import { TrendingUp, ArrowRight, BookOpen, Users, Award } from "lucide-react";
 
@@ -13,6 +16,7 @@ export default function Home() {
     { name: "Mobile Development", icon: "BookOpen" },
     { name: "Web Development", icon: "BookOpen" },
   ];
+  const courses = getCourses();
   return (
     <div className="flex flex-col items-center space-y-24 mt-32">
       {/* hero section */}
@@ -90,39 +94,13 @@ export default function Home() {
           ))}
         </div>
       </section>
-      <section className="w-full space-y-6">
-        <div className="flex flex-col xs:flex-row gap-4 xs:gap-0 justify-between">
-          <div>
-            <h2 className="text-2xl font-bold text-foreground">
-              Featured Courses
-            </h2>
-            <p className="text-muted-foreground">
-              Popular courses picked for you
-            </p>
-          </div>
-          <Link href={"/courses"}>
-            <Button className="p-4 bg-background text-foreground border-2 border-border hover:bg-accent hover:text-accent-foreground cursor-pointer">
-              View All
-            </Button>
-          </Link>
-        </div>
-        <div className="border-2 border-border border-dotted py-16 rounded-sm">
-          <div className="flex flex-col items-center gap-2">
-            <BookOpen className="size-12 text-muted-foreground" />
-            <h3 className="text-foreground font-bold">No courses yet</h3>
-            <p className="text-muted-foreground">
-              Be the first instructor to create a course!
-            </p>
-            <Link href={"/auth/sign-up?role=teach"}>
-              <Button className="text-primary-foreground bg-primary hover:bg-primary/80 transition-colors duration-200 cursor-pointer">
-                Start Teaching
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* featured courses */}
+      <FeaturedCourses />
+
       <section className="flex flex-col items-center justify-center gap-4 bg-primary text-primary-foreground w-full py-16 ">
-        <h2 className="text-xl xs:text-2xl font-bold">Ready to Start Learning?</h2>
+        <h2 className="text-xl xs:text-2xl font-bold">
+          Ready to Start Learning?
+        </h2>
         <p className="text-secondary text-center">
           Join thousands of learners. Gain new skills, earn certificates, and
           advance <br /> your career.
