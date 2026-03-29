@@ -2,6 +2,7 @@ import { BookOpen } from "lucide-react";
 import { CoursesCard } from "./coursesCard";
 import { Suspense } from "react";
 import { Spinner } from "./ui/spinner";
+import { getCourses } from "@/lib/api";
 
 interface CourseProps {
   id: number;
@@ -36,10 +37,7 @@ const CoursesSection = async ({ params }: CoursesSectionProps) => {
   };
   const normalizedCategory = normalizeCategory(category);
 
-  const data = await fetch("https://dummyjson.com/c/68d1-ae2a-4947-9c55", {
-    next: { revalidate: 120 },
-  });
-  const courses = await data.json();
+  const courses = await getCourses();
 
   const filteredCourses = courses.filter((course: CourseProps) => {
     const matchesCategory =
