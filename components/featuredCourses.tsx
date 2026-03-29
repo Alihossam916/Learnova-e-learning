@@ -1,14 +1,11 @@
-import React from "react";
 import Link from "next/link";
-import { Suspense } from "react";
 // api
 import { getCourses } from "@/lib/api";
-// componentsimport { CoursesCard } from "@/components/coursesCard";
+// components
 import { Button } from "@/components/ui/button";
+import { CoursesCard } from "./coursesCard";
 // icons
 import { BookOpen } from "lucide-react";
-import { Spinner } from "./ui/spinner";
-import { CoursesCard } from "./coursesCard";
 
 interface CourseProps {
   id: number;
@@ -48,11 +45,9 @@ const FeaturedCourses = async () => {
       </div>
       {featuredCourses ? (
         <div className="flex flex-wrap items-center justify-center gap-8 last:mr-auto">
-          <Suspense fallback={<Spinner className="size-12" />}>
-            {featuredCourses.map((course: CourseProps) => {
-              return <CoursesCard course={course} key={course.id} />;
-            })}
-          </Suspense>
+          {featuredCourses.map((course: CourseProps) => {
+            return <CoursesCard course={course} key={course.id} />;
+          })}
         </div>
       ) : (
         <div className="border-2 border-border border-dotted py-16 rounded-sm">
