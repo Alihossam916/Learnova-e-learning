@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import CoursesSection from "@/components/coursesSection";
+import CoursesSection from "@/components/common/coursesSection";
 
 type CoursesPageProps = {
   searchParams: Promise<{ category?: string; search?: string }>;

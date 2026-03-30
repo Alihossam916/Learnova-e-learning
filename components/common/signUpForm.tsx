@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
+import { v4 as uuidv4 } from "uuid";
 
 const SignUpForm = () => {
   const searchParams = useSearchParams();
   const role = searchParams.get("role");
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -27,10 +27,31 @@ const SignUpForm = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
-    // Add your sign-up logic here
+    // basic validation
+    const { firstName, lastName, email, password } = formData;
+    if (!firstName || !lastName || !email || !password) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+    // check if user already exists via email
+    const existingUser = localStorage.getItem("users");    
+    if (existingUser && JSON.parse(existingUser).find((user: { email: string }) => user.email === email)) {
+      alert("An account with this email already exists.");
+      return;
+    }
+    // simulate account creation by saving user data to localStorage and sessionStorage
+    const userId = uuidv4(); // generate a unique user ID
+    const userData = { id: userId, ...formData };
+    const users = existingUser
+      ? [...JSON.parse(existingUser), userData]
+      : [userData];
+
+    localStorage.setItem("users", JSON.stringify(users));
+    sessionStorage.setItem("user", JSON.stringify(userData));
+    alert("Account created successfully!");
+    router.push("/");
   };
 
   return (
@@ -165,7 +186,7 @@ const SignUpForm = () => {
       {/* Create Account Button */}
       <button
         type="submit"
-        className="w-full bg-primary text-primary-foreground font-semibold py-2 px-4 rounded-sm hover:bg-primary/90 transition duration-200 mt-6"
+        className="cursor-pointer w-full bg-primary text-primary-foreground font-semibold py-2 px-4 rounded-sm hover:bg-primary/90 transition duration-200 mt-6"
       >
         Create Account
       </button>

@@ -7,7 +7,7 @@ import SideNavbar from "@/components/layouts/sideNavbar";
 import Footer from "@/components/layouts/footer";
 import MainContent from "@/components/layouts/mainContent";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ModeToggle } from "@/components/theme-button";
+import { ModeToggle } from "@/components/common/theme-button";
 
 // context
 import { SidebarProvider } from "@/lib/sidebarContext";

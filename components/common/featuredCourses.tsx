@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getCourses } from "@/lib/api";
 // components
 import { Button } from "@/components/ui/button";
-import { CoursesCard } from "./coursesCard";
+import { CoursesCard } from "./common/coursesCard";
 // icons
 import { BookOpen } from "lucide-react";
 import { Suspense } from "react";

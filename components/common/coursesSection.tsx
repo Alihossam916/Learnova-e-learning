@@ -1,7 +1,10 @@
-import { BookOpen } from "lucide-react";
-import { CoursesCard } from "./coursesCard";
 import { Suspense } from "react";
-import { Spinner } from "./ui/spinner";
+// components
+import { CoursesCard } from "./coursesCard";
+import { Spinner } from "../ui/spinner";
+// icons
+import { BookOpen } from "lucide-react";
+// api
 import { getCourses } from "@/lib/api";
 
 interface CourseProps {

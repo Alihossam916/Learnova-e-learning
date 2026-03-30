@@ -1,7 +1,7 @@
 import { BookOpen } from "lucide-react";
 import { Suspense } from "react";
 import Link from "next/link";
-import SignUpForm from "@/components/signUpForm";
+import SignUpForm from "@/components/common/signUpForm";
 
 const SignUp = () => {
   return (
