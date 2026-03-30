@@ -36,9 +36,11 @@ interface CourseProps {
 }
 
 export function CoursesCard({ course }: CourseProps) {
-
   return (
-    <Link href={`/courses/${course.id}`} className="relative w-full max-w-sm hover:scale-105 hover:drop-shadow-2xl transition-all duration-200">
+    <Link
+      href={`/courses/${course.id}`}
+      className="relative w-full max-w-sm hover:scale-105 hover:drop-shadow-2xl transition-all duration-200"
+    >
       <Card className="pt-0">
         <div className="absolute inset-0 z-30 aspect-video" />
         <Image
@@ -49,7 +51,7 @@ export function CoursesCard({ course }: CourseProps) {
           className="relative z-20 aspect-video w-full object-cover brightness-60 hover:brightness-100"
         />
         <CardHeader>
-          <CardAction>
+          <div className="flex flex-row-reverse items-center justify-between">
             <Badge
               variant={
                 course.level === "beginner"
@@ -61,10 +63,10 @@ export function CoursesCard({ course }: CourseProps) {
             >
               {course.level}
             </Badge>
-          </CardAction>
-          <CardTitle className="text-primary font-semibold">
-            {course.title}
-          </CardTitle>
+            <CardTitle className="text-primary font-semibold">
+              {course.title}
+            </CardTitle>
+          </div>
           <CardDescription>{course.description}</CardDescription>
           <CardContent className="flex flex-col gap-2 mt-2 w-[17rem]">
             <p className="text-muted-foreground">{course.instructor}</p>
