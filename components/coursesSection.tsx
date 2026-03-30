@@ -61,7 +61,7 @@ const CoursesSection = async ({ params }: CoursesSectionProps) => {
           </Suspense>
         </div>
       ) : (
-        <div className="flex flex-col items-center text-center p-24 border-2 border-dotted border-border rounded-sm">
+        <div className="flex flex-col items-center text-center p-16 sm:p-24 border-2 border-dotted border-border rounded-sm">
           <BookOpen className="text-muted-foreground size-12" />
           <h3 className="text-xl text-foreground font-bold">
             No courses found
