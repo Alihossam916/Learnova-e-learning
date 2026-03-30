@@ -3,11 +3,11 @@ import Link from "next/link";
 import { getCourses } from "@/lib/api";
 // components
 import { Button } from "@/components/ui/button";
-import { CoursesCard } from "./common/coursesCard";
+import { CoursesCard } from "./coursesCard";
 // icons
 import { BookOpen } from "lucide-react";
 import { Suspense } from "react";
-import { Spinner } from "./ui/spinner";
+import { Spinner } from "@/components/ui/spinner";
 
 interface CourseProps {
   id: number;

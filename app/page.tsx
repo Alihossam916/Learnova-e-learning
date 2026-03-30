@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getCourses } from "@/lib/api";
 // components
 import { Button } from "@/components/ui/button";
-import FeaturedCourses from "@/components/featuredCourses";
+import FeaturedCourses from "@/components/common/featuredCourses";
 // icons
 import { TrendingUp, ArrowRight, BookOpen, Users, Award } from "lucide-react";
 

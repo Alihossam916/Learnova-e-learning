@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 // components
 import { CoursesCard } from "./coursesCard";
-import { Spinner } from "../ui/spinner";
+import { Spinner } from "@/components/ui/spinner";
 // icons
 import { BookOpen } from "lucide-react";
 // api
