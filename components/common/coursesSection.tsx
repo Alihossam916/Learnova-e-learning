@@ -1,7 +1,5 @@
-import { Suspense } from "react";
 // components
 import { CoursesCard } from "./coursesCard";
-import { Spinner } from "@/components/ui/spinner";
 // icons
 import { BookOpen } from "lucide-react";
 // api
@@ -57,11 +55,9 @@ const CoursesSection = async ({ params }: CoursesSectionProps) => {
     <section className="my-12">
       {filteredCourses.length > 0 ? (
         <div className="flex flex-wrap items-center justify-center gap-8 last:mr-auto">
-          <Suspense fallback={<Spinner className="size-12" />}>
             {filteredCourses.map((course: CourseProps) => {
               return <CoursesCard course={course} key={course.id} />;
             })}
-          </Suspense>
         </div>
       ) : (
         <div className="flex flex-col items-center text-center p-16 sm:p-24 border-2 border-dotted border-border rounded-sm">
