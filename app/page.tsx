@@ -1,6 +1,4 @@
 import Link from "next/link";
-// api
-import { getCourses } from "@/lib/api";
 // components
 import { Button } from "@/components/ui/button";
 import FeaturedCourses from "@/components/common/featuredCourses";
@@ -16,7 +14,6 @@ export default function Home() {
     { name: "Mobile Development", icon: "BookOpen" },
     { name: "Web Development", icon: "BookOpen" },
   ];
-  const courses = getCourses();
   return (
     <div className="flex flex-col items-center space-y-24 mt-32">
       {/* hero section */}
