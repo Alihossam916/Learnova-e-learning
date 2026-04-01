@@ -1,10 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import { Suspense } from "react";
+// components
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
 import CoursesSection from "@/components/common/coursesSection";
+import { SkeletonCourseCard } from "@/components/common/skeletonCourseCard";
 
 type CoursesPageProps = {
   searchParams: Promise<{ category?: string; search?: string }>;
@@ -90,7 +91,15 @@ const Courses = async ({ searchParams }: CoursesPageProps) => {
         </div>
       </section>
       {/* Courses Section */}
-      <Suspense fallback={<Spinner className="size-12" />}>
+      <Suspense
+        fallback={
+          <div className="my-12 flex flex-wrap items-center justify-center gap-8">
+            <SkeletonCourseCard />
+            <SkeletonCourseCard />
+            <SkeletonCourseCard />
+          </div>
+        }
+      >
         <CoursesSection
           params={Promise.resolve({
             category: selectedCategory,
