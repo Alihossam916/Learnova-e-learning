@@ -46,25 +46,25 @@ const SideNavbar = () => {
               {extended && "Courses"}
             </Link>
           </li>
-          <li>
-            <Link
-              href="/dashboard"
-              className="flex items-center gap-4 w-full text-lg font-semibold text-foreground hover:text-primary hover:bg-primary/ transition-colors duration-200"
-            >
-              <LayoutDashboard />
-              {extended && "Dashboard"}
-            </Link>
-          </li>
+            <li>
+              <Link
+                href="/dashboard"
+                className="flex items-center gap-4 w-full text-lg font-semibold text-foreground hover:text-primary hover:bg-primary/ transition-colors duration-200"
+              >
+                <LayoutDashboard />
+                {extended && "Dashboard"}
+              </Link>
+            </li>
         </ul>
-          <hr className="-ml-0.5 my-2 border-2 w-full" />{" "}
-          {/* Additional links or content can be added here */}
-          <Link
-            href="/auth/login"
-            className="flex items-center gap-4 w-full text-lg font-semibold text-foreground hover:text-primary hover:bg-primary/ transition-colors duration-200"
-          >
-            <LogIn />
-            {extended && "Sign In"}
-          </Link>
+        <hr className="-ml-0.5 my-2 border-2 w-full" />{" "}
+        {/* Additional links or content can be added here */}
+        <Link
+          href="/auth/login"
+          className="flex items-center gap-4 w-full text-lg font-semibold text-foreground hover:text-primary hover:bg-primary/ transition-colors duration-200"
+        >
+          <LogIn />
+          {extended && "Sign In"}
+        </Link>
       </nav>
     </aside>
   );
