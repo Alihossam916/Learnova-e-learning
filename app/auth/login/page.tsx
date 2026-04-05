@@ -1,14 +1,20 @@
 "use client";
 
-import Link from "next/link";
 import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+// icons
 import { BookOpen } from "lucide-react";
+// lib
+import { signIn } from "@/lib/auth";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -18,10 +24,20 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Login form data:", formData);
-    //add login logic here
+    const { email, password } = formData;
+    if (!email || !password) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+    const result = await signIn(email, password);
+    if (!result.success) {
+      alert(result.error || "Error signing in. Please try again.");
+      return;
+    }
+    alert("Login successful!");
+    router.push("/");
   };
 
   return (

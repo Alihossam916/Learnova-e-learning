@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { v4 as uuidv4 } from "uuid";
+// lib
+import { signUp } from "@/lib/auth";
 
 const SignUpForm = () => {
   const searchParams = useSearchParams();
@@ -27,7 +28,7 @@ const SignUpForm = () => {
     }));
   };
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     // basic validation
     const { firstName, lastName, email, password } = formData;
@@ -35,21 +36,11 @@ const SignUpForm = () => {
       alert("Please fill in all required fields.");
       return;
     }
-    // check if user already exists via email
-    const existingUser = localStorage.getItem("users");    
-    if (existingUser && JSON.parse(existingUser).find((user: { email: string }) => user.email === email)) {
-      alert("An account with this email already exists.");
+    const result = await signUp(formData);
+    if (!result.success) {
+      alert(result.error || "Error creating account. Please try again.");
       return;
     }
-    // simulate account creation by saving user data to localStorage and sessionStorage
-    const userId = uuidv4(); // generate a unique user ID
-    const userData = { id: userId, ...formData };
-    const users = existingUser
-      ? [...JSON.parse(existingUser), userData]
-      : [userData];
-
-    localStorage.setItem("users", JSON.stringify(users));
-    sessionStorage.setItem("user", JSON.stringify(userData));
     alert("Account created successfully!");
     router.push("/");
   };
