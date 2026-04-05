@@ -4,12 +4,22 @@ import Link from "next/link";
 // icons
 import { X } from "lucide-react";
 
+type User = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+} | null;
+
 const MobileNav = ({
   isMobileMenuOpen,
   setIsMobileMenuOpen,
+  user,
 }: {
   isMobileMenuOpen: boolean;
   setIsMobileMenuOpen: (isOpen: boolean) => void;
+  user: User;
 }) => {
   return (
     <>
@@ -51,14 +61,28 @@ const MobileNav = ({
                 Courses
               </Link>
             </li>
-            <li>
-              <Link
-                href="/dashboard"
-                className="text-lg font-semibold text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
-              >
-                Dashboard
-              </Link>
-            </li>
+            {user ? (
+              <li>
+                <Link
+                  href="/dashboard"
+                  className="text-lg font-semibold text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
+                >
+                  Dashboard
+                </Link>
+              </li>
+            ) : (
+              <>
+                <hr className="-ml-0.5 mb-2 border-2 w-full" />
+                <li>
+                  <Link
+                    href="/auth/login"
+                    className="text-lg font-semibold text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
+                  >
+                    Sign In
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       </aside>
