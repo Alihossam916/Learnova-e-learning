@@ -6,16 +6,12 @@ import { X } from "lucide-react";
 
 // stores
 import { useAuthStore } from "@/store/authStore";
+import { useMobileMenuStore } from "@/store/mobileMenuStore";
 
-const MobileNav = ({
-  isMobileMenuOpen,
-  setIsMobileMenuOpen,
-}: {
-  isMobileMenuOpen: boolean;
-  setIsMobileMenuOpen: (isOpen: boolean) => void;
-}) => {
+const MobileNav = () => {
   const { user } = useAuthStore(); // Access the user state from authStore
- 
+  const { isMobileMenuOpen, setIsMobileMenuOpen } = useMobileMenuStore(); // Access mobile menu state and setter from the store
+
   return (
     <>
       <div

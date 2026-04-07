@@ -1,7 +1,4 @@
 "use client";
-
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 // icons
@@ -15,6 +12,7 @@ import { signOut } from "@/lib/auth";
 
 // stores
 import { useAuthStore } from "@/store/authStore";
+import { useMobileMenuStore } from "@/store/mobileMenuStore";
 
 // shadcn ui imports
 import { Button } from "@/components/ui/button";
@@ -28,11 +26,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-
 const Navbar = () => {
   const { user } = useAuthStore(); // Access the user state from authStore
-  const router = useRouter();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State to manage mobile menu visibility
+  const { isMobileMenuOpen, setIsMobileMenuOpen } = useMobileMenuStore(); // Access mobile menu state and setter from the store
 
   const handleSignOut = async () => {
     const result = await signOut();
@@ -41,7 +37,6 @@ const Navbar = () => {
       return;
     }
     alert("Signed out successfully.");
-    router.refresh(); // triggers server re-render → new user prop passed down
   };
 
   // Get initials from name e.g. "Ahmed Hassan" → "AH"
@@ -103,8 +98,6 @@ const Navbar = () => {
       </nav>
       <div className="sm:hidden">
         <MobileNav
-          isMobileMenuOpen={isMobileMenuOpen}
-          setIsMobileMenuOpen={setIsMobileMenuOpen}
         />
       </div>
     </>
