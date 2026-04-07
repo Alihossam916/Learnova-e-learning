@@ -1,9 +1,9 @@
 "use client";
-import { useSidebar } from "@/lib/sidebarContext";
+import { useSidebarStore } from "@/store/sidebarStore";
 import { ReactNode, useState, useEffect } from "react";
 
 export default function MainContent({ children }: { children: ReactNode }) {
-  const { extended } = useSidebar();
+  const { extended } = useSidebarStore();
   const [screenWidth, setScreenWidth] = useState(0);
 
   useEffect(() => {

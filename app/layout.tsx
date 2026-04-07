@@ -6,11 +6,14 @@ import Navbar from "@/components/layouts/navbar";
 import SideNavbar from "@/components/layouts/sideNavbar";
 import Footer from "@/components/layouts/footer";
 import MainContent from "@/components/layouts/mainContent";
-import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/common/theme-button";
 
-// context
-import { SidebarProvider } from "@/lib/sidebarContext";
+// lib
+import { getCurrentUser } from "@/lib/auth";
+
+// providers
+import { ThemeProvider } from "@/components/theme-provider";
+import { AuthProvider } from "@/components/providers/authProvider";
 
 // styles
 import "./globals.css";
@@ -31,11 +34,13 @@ export const metadata: Metadata = {
     "Discover a world of knowledge with Learnova. Our expert-led courses empower you to master new skills, advance your career, and achieve your goals. Join thousands of learners worldwide and start your learning journey today.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await getCurrentUser();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${dmSans.variable} ${inter.variable} antialiased`}>
@@ -44,14 +49,14 @@ export default function RootLayout({
           defaultTheme="light"
           disableTransitionOnChange
         >
-          <Navbar />
-          <SidebarProvider>
+          <AuthProvider initialUser={user}>
+            <Navbar />
             <SideNavbar />
             <MainContent>
               <main className="mt-20 mx-0 sm:mx-6">{children}</main>
               <Footer />
             </MainContent>
-          </SidebarProvider>
+          </AuthProvider>
           <ModeToggle />
         </ThemeProvider>
       </body>

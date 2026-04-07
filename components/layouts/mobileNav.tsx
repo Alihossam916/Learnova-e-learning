@@ -4,23 +4,18 @@ import Link from "next/link";
 // icons
 import { X } from "lucide-react";
 
-type User = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  role: string;
-} | null;
+// stores
+import { useAuthStore } from "@/store/authStore";
 
 const MobileNav = ({
   isMobileMenuOpen,
   setIsMobileMenuOpen,
-  user,
 }: {
   isMobileMenuOpen: boolean;
   setIsMobileMenuOpen: (isOpen: boolean) => void;
-  user: User;
 }) => {
+  const { user } = useAuthStore(); // Access the user state from authStore
+ 
   return (
     <>
       <div
