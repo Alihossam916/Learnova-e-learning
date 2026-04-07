@@ -12,7 +12,7 @@ import { ModeToggle } from "@/components/common/theme-button";
 import { getCurrentUser } from "@/lib/auth";
 
 // providers
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import { AuthProvider } from "@/components/providers/authProvider";
 
 // styles
