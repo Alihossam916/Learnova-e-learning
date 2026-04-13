@@ -27,18 +27,11 @@ type CoursesSectionProps = {
   params: Promise<{ category: string; search: string }>;
 };
 
-const normalizeCategory = (value: string) =>
-  decodeURIComponent(value)
-    .trim()
-    .toLowerCase()
-    .replace(/[-_\s]+/g, " ");
-
 const CoursesSection = async ({ params }: CoursesSectionProps) => {
   const { category, search } = (await params) || {
     category: "all",
     search: "",
   };
-  const normalizedCategory = normalizeCategory(category);
 
   const courses = await getCourses();
 
