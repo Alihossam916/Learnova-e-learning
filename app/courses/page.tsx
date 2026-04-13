@@ -13,10 +13,10 @@ type CoursesPageProps = {
 
 const categories: string[] = [
   "all",
-  "business",
-  "data science",
+  "programming",
+  "databases",
   "design",
-  "marketing",
+  "devops",
   "mobile development",
   "web development",
 ];
