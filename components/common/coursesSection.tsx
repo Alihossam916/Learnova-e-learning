@@ -2,8 +2,10 @@
 import { CoursesCard } from "./coursesCard";
 // icons
 import { BookOpen } from "lucide-react";
-// api
+// lib
 import { getCourses } from "@/lib/api";
+import { filterCourses } from "@/lib/filterCourses";
+
 
 interface CourseProps {
   id: number;
@@ -40,16 +42,7 @@ const CoursesSection = async ({ params }: CoursesSectionProps) => {
 
   const courses = await getCourses();
 
-  const filteredCourses = courses.filter((course: CourseProps) => {
-    const matchesCategory =
-      normalizedCategory === "all" ||
-      course.category.toLowerCase() === normalizedCategory;
-    const matchesSearch =
-      search === "" ||
-      course.title.toLowerCase().includes(search.toLowerCase()) ||
-      course.description.toLowerCase().includes(search.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+const filteredCourses = filterCourses(courses, category, search);
 
   return (
     <section className="my-12">
