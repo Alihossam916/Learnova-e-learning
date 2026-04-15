@@ -7,12 +7,12 @@ import { TrendingUp, ArrowRight, BookOpen, Users, Award } from "lucide-react";
 
 export default function Home() {
   const categories = [
-    { name: "Business", icon: "BookOpen" },
-    { name: "Data Science", icon: "BookOpen" },
-    { name: "Design", icon: "BookOpen" },
-    { name: "Marketing", icon: "BookOpen" },
-    { name: "Mobile Development", icon: "BookOpen" },
-    { name: "Web Development", icon: "BookOpen" },
+    { name: "programming", icon: "BookOpen" },
+    { name: "databases", icon: "BookOpen" },
+    { name: "design", icon: "BookOpen" },
+    { name: "devops", icon: "BookOpen" },
+    { name: "mobile development", icon: "BookOpen" },
+    { name: "web development", icon: "BookOpen" },
   ];
   return (
     <div className="flex flex-col items-center space-y-24 mt-32">
@@ -83,7 +83,7 @@ export default function Home() {
             >
               <Button className="flex flex-col items-center gap-2 bg-background border-2 border-border h-full w-44 p-4 hover:scale-115 hover:shadow-xl shadow-shadow-color cursor-pointer">
                 <BookOpen className="text-primary bg-primary/20 p-2 rounded-sm size-12" />
-                <h4 className="text-foreground font-semibold">
+                <h4 className="text-foreground font-semibold capitalize">
                   {category.name}
                 </h4>
               </Button>
