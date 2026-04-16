@@ -74,10 +74,16 @@ const Navbar = () => {
                 <DropdownMenuLabel className="font-semibold text-md capitalize">
                   Hello, {user.firstName}
                 </DropdownMenuLabel>
-                <DropdownMenuItem className="text-md">Profile</DropdownMenuItem>
-                <DropdownMenuItem className="text-md">
-                  Dashboard
-                </DropdownMenuItem>
+                <Link href="/profile">
+                  <DropdownMenuItem className="text-md">
+                    Profile
+                  </DropdownMenuItem>
+                </Link>
+                <Link href="/dashboard">
+                  <DropdownMenuItem className="text-md">
+                    Dashboard
+                  </DropdownMenuItem>
+                </Link>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
@@ -97,8 +103,7 @@ const Navbar = () => {
         )}
       </nav>
       <div className="sm:hidden">
-        <MobileNav
-        />
+        <MobileNav />
       </div>
     </>
   );
