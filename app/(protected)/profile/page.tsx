@@ -1,9 +1,9 @@
-import React from 'react'
+import ProfileForm from "@/components/common/profileForm";
 
-const Profile = () => {
+export default function Profile() {
   return (
-    <main>Profile</main>
-  )
+    <div className="w-full">
+      <ProfileForm />
+    </div>
+  );
 }
-
-export default Profile
