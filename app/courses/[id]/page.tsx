@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 // lib
 import { getCourseById } from "@/lib/api";
+import { getCurrentUser } from "@/lib/auth";
 
 // types
 import { Course } from "@/lib/filterCourses";
@@ -38,6 +39,7 @@ const LessonsList = () => {
 const CoursePage = async ({ params }: CoursePageProps) => {
   const { id } = await params;
   const course: Course = await getCourseById(id);
+  const user = await getCurrentUser();
 
   const initials =
     `${course.instructor.split(" ")[0][0]}${course.instructor.split(" ")[1][0]}`.toUpperCase();
@@ -94,7 +96,7 @@ const CoursePage = async ({ params }: CoursePageProps) => {
             height={200}
           />
           <Link
-            href={`/courses/${course.id}/checkout`}
+            href={user?`/courses/${course.id}/checkout`:`/auth/login`}
             className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-2 px-4 rounded-sm text-center"
           >
             Enroll Now -{" "}
@@ -106,7 +108,9 @@ const CoursePage = async ({ params }: CoursePageProps) => {
       <div className="flex flex-col-reverse lg:flex-row md:justify-between gap-4 lg:gap-0 mt-4 lg:mt-12">
         <section className="flex flex-col gap-4 w-full lg:w-2/3">
           {/* lessons */}
-          <h4 className="text-lg text-center sm:text-left font-bold">Course Content (12 Lessons)</h4>
+          <h4 className="text-lg text-center sm:text-left font-bold">
+            Course Content (12 Lessons)
+          </h4>
           <LessonsList />
           <Link
             href={`/courses/${course.id}/quiz`}
