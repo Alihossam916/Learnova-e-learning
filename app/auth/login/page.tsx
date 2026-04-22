@@ -99,7 +99,7 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full bg-primary text-primary-foreground font-semibold py-2 px-4 rounded-sm hover:bg-primary/90 transition duration-200 mt-6"
+              className="w-full bg-primary text-primary-foreground font-semibold py-2 px-4 rounded-sm cursor-pointer hover:bg-primary/90 transition duration-200 mt-6"
             >
               Sign In
             </button>
