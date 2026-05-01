@@ -1,9 +1,141 @@
-import React from 'react'
+import React from "react";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 
-const Dashboard = () => {
+// shadcn ui
+import { Button } from "@/components/ui/button";
+
+// components
+import { CoursesCard } from "@/components/common/coursesCard";
+
+// types
+import { Course } from "@/lib/filterCourses";
+
+// icons
+import { BookOpen, TrendingUp, CirclePlay, Award } from "lucide-react";
+
+// lib
+import { getCurrentUser } from "@/lib/auth";
+import { getCourseById } from "@/lib/api";
+
+const Dashboard = async () => {
+  const user = await getCurrentUser();
+  
+  if (!user) {
+    redirect("/auth/login");
+  }
+
+  // get enrolled courses
+  const enrolledCoursesId = user.enrolledCourses;
+  const enrolledCourses = await getCourseById(enrolledCoursesId);
+
   return (
-    <main>Dashboard</main>
-  )
-}
+    <div className="flex flex-col px-8 sm:px-4 pb-8">
+      {user.role == "teach" ? (
+        <div className="space-y-8">
+          {/* instructor dashboard */}
+          <section className="flex items-center justify-between">
+            <div className="space-y-1">
+              <h2 className="text-2xl font-bold">Instructor Dashboard</h2>
+              <p className="text-muted-foreground text-sm capitalize">
+                Welcome back,{" "}
+                <span className="capitalize">
+                  {user.firstName} {user.lastName}
+                </span>
+              </p>
+            </div>
+            {/* for adding new courses (needs database to store new courses) */}
+            <Link href={"/dashboard/new-course"}>
+              <Button className="flex items-center gap-4 px-3 py-4.5 cursor-pointer bg-primary text-primary-foreground hover:bg-primary/80 transition-colors duration-200">
+                <span className="font-bold">+</span> New Course
+              </Button>
+            </Link>
+          </section>
+        </div>
+      ) : (
+        <div className="space-y-8">
+          {/* student dashboard */}
+          <section className="space-y-1">
+            <h2 className="text-2xl font-bold">
+              Welcome back, <span className="capitalize">{user.firstName}</span>
+            </h2>
+            <p className="text-muted-foreground text-sm capitalize">
+              Track your learning progress
+            </p>
+          </section>
+          {/* progress overview */}
+          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="flex items-center gap-4 border-border border-2 rounded-sm p-8">
+              <BookOpen className="size-10 p-2 text-primary bg-primary/20 rounded-sm" />
+              <div className="flex flex-col">
+                <div className="font-bold text-2xl">0</div>
+                <div className="text-muted-foreground text-sm">Enrolled</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-4 border-border border-2 rounded-sm p-8">
+              <TrendingUp className="size-10 p-2 text-chart-4 bg-chart-4/20 rounded-sm" />
+              <div className="flex flex-col">
+                <div className="font-bold text-2xl">0</div>
+                <div className="text-muted-foreground text-sm">In Progress</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-4 border-border border-2 rounded-sm p-8">
+              <CirclePlay className="size-10 p-2 text-primary bg-primary/20 rounded-sm" />
+              <div className="flex flex-col">
+                <div className="font-bold text-2xl">0</div>
+                <div className="text-muted-foreground text-sm">Completed</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-4 border-border border-2 rounded-sm p-8">
+              <Award className="size-10 p-2 text-chart-3 bg-chart-3/20 rounded-sm" />
+              <div className="flex flex-col">
+                <div className="font-bold text-2xl">0</div>
+                <div className="text-muted-foreground text-sm">
+                  Certificates
+                </div>
+              </div>
+            </div>
+          </section>
+          {/* enrolled courses */}
+          <section className="space-y-2">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-bold">My Courses</h3>
+              <Link href={"/courses"}>
+                <Button
+                  variant="outline"
+                  className="p-4 cursor-pointer border-2 hover:bg-accent hover:text-accent-foreground"
+                >
+                  Browse More
+                </Button>
+              </Link>
+            </div>
+            {user.enrolledCourses ? (
+              <article className="flex items-center p-16 border-2 border-border">
+                {enrolledCourses.map((course: Course) => (
+                  <CoursesCard course={course} key={course.id} />
+                ))}
+              </article>
+            ) : (
+              <article className="flex flex-col justify-center items-center gap-4 p-16 border-2 border-border">
+                <BookOpen className="text-muted-foreground size-12" />
+                <p className="text-muted-foreground">
+                  You haven&apos;t enrolled in any courses yet
+                </p>
+                <Link href={"/courses"}>
+                  <Button
+                    variant="default"
+                    className="p-5 cursor-pointer hover:bg-primary/80"
+                  >
+                    Browse More
+                  </Button>
+                </Link>
+              </article>
+            )}
+          </section>
+        </div>
+      )}
+    </div>
+  );
+};
 
-export default Dashboard
+export default Dashboard;
