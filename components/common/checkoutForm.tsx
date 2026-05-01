@@ -62,7 +62,7 @@ const CheckoutForm = ({ course }: { course: Course }) => {
       cvv: cvv,
     };
     // verify payment proccess
-    const result = await processPayment(formDetails, course.price);
+    const result = await processPayment(formDetails);
     if (result.success == false) {
       alert(result.error);
     } else {
