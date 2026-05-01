@@ -12,6 +12,7 @@ import { CreditCard } from "lucide-react";
 
 // lib
 import { processPayment } from "@/lib/mockPayment";
+import { updateUserDashboard } from "@/lib/updateDashboard";
 
 const CheckoutForm = ({ course }: { course: Course }) => {
   const router = useRouter();
@@ -65,6 +66,7 @@ const CheckoutForm = ({ course }: { course: Course }) => {
     if (result.success == false) {
       alert(result.error);
     } else {
+      await updateUserDashboard(course);
       alert(`Successful Transaction: ${result.transactionId}`);
       router.push("/dashboard");
     }
