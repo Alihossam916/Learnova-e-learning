@@ -19,8 +19,6 @@ interface User {
   role: string;
 }
 
-const expiresIn = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
-
 export async function signUp(formData: FormData) {
   const { firstName, lastName, email, password, role } = formData;
   const cookieStore = await cookies();
@@ -76,6 +74,8 @@ export async function signIn(email: string, password: string) {
 }
 
 async function createSession(user: User) {
+  const expiresIn = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+
   const cookieStore = await cookies();
   // Create a session for the logged-in user
   const sessionToken = uuidv4();
@@ -137,6 +137,8 @@ export async function updateProfile(formData: {
   email: string;
   role: string;
 }) {
+  const expiresIn = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+
   const cookieStore = await cookies();
   const sessionToken = cookieStore.get("sessionToken")?.value;
 
