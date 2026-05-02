@@ -17,6 +17,7 @@ interface User {
   email: string;
   password: string;
   role: string;
+  enrolledCourses?: string[];
 }
 
 export async function signUp(formData: FormData) {
@@ -26,7 +27,7 @@ export async function signUp(formData: FormData) {
   //   hash the password before storing
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const newUser = {
+  const newUser: User = {
     id: uuidv4(),
     firstName,
     lastName,
@@ -34,6 +35,10 @@ export async function signUp(formData: FormData) {
     password: hashedPassword,
     role,
   };
+
+  if (role == "learn") {
+    newUser.enrolledCourses = [];
+  }
 
   // Retrieve existing users from cookies, or initialize an empty array if none exist
   const existingUsers = cookieStore.get("users");
@@ -51,7 +56,7 @@ export async function signUp(formData: FormData) {
     secure: true,
   });
   await createSession(newUser);
-  return { success: true};
+  return { success: true };
 }
 
 export async function signIn(email: string, password: string) {
@@ -79,10 +84,9 @@ async function createSession(user: User) {
   const cookieStore = await cookies();
   // Create a session for the logged-in user
   const sessionToken = uuidv4();
-  const sessions = cookieStore.get("sessions");
-  const allSessions = sessions ? JSON.parse(sessions.value) : [];
+  const session = [];
 
-  allSessions.push({
+  session.push({
     id: sessionToken,
     userId: user.id,
     email: user.email,
@@ -90,6 +94,7 @@ async function createSession(user: User) {
     lastName: user.lastName,
     role: user.role,
     createdAt: new Date(),
+    enrolledCourses: user.enrolledCourses,
   });
 
   // Store session in httpOnly cookie
@@ -99,7 +104,7 @@ async function createSession(user: User) {
     secure: true,
   });
 
-  cookieStore.set("sessions", JSON.stringify(allSessions), {
+  cookieStore.set("sessions", JSON.stringify(session), {
     expires: expiresIn,
     httpOnly: true,
     secure: true,
@@ -110,16 +115,14 @@ async function createSession(user: User) {
 export async function getCurrentUser() {
   const cookieStore = await cookies();
   const sessionToken = cookieStore.get("sessionToken")?.value;
-
   if (!sessionToken) return null;
 
   const sessions = cookieStore.get("sessions");
-  const allSessions = sessions ? JSON.parse(sessions.value) : [];
+  if (!sessions) return null;
 
-  const session = allSessions.find(
-    (s: { id: string }) => s.id === sessionToken,
-  );
-  return session || null;
+  const session = sessions ? JSON.parse(sessions.value) : [];
+
+  return session[0] || null;
 }
 
 // Logout
@@ -145,23 +148,18 @@ export async function updateProfile(formData: {
   if (!sessionToken) return { success: false, error: "Not authenticated" };
 
   const sessions = cookieStore.get("sessions");
-  const allSessions = sessions ? JSON.parse(sessions.value) : [];
-
-  const sessionIndex = allSessions.findIndex(
-    (s: { id: string }) => s.id === sessionToken,
-  );
-
-  if (sessionIndex === -1)
-    return { success: false, error: "Session not found" };
+  const session = sessions ? JSON.parse(sessions.value) : [];
 
   // Update session data
-  allSessions[sessionIndex] = {
-    ...allSessions[sessionIndex],
-    firstName: formData.firstName,
-    lastName: formData.lastName,
+  session[0] = {
+    ...session[0],
+    firstName:
+      formData.firstName.charAt(0).toUpperCase() + formData.firstName.slice(1),
+    lastName:
+      formData.lastName.charAt(0).toUpperCase() + formData.lastName.slice(1),
   };
 
-  cookieStore.set("sessions", JSON.stringify(allSessions), {
+  cookieStore.set("sessions", JSON.stringify(session), {
     expires: expiresIn,
     httpOnly: true,
     secure: true,
@@ -172,14 +170,17 @@ export async function updateProfile(formData: {
   const allUsers = users ? JSON.parse(users.value) : [];
 
   const userIndex = allUsers.findIndex(
-    (u: { id: string }) => u.id === allSessions[sessionIndex].userId,
+    (u: { id: string }) => u.id === session[0].userId,
   );
 
   if (userIndex !== -1) {
     allUsers[userIndex] = {
       ...allUsers[userIndex],
-      firstName: formData.firstName,
-      lastName: formData.lastName,
+      firstName:
+        formData.firstName.charAt(0).toUpperCase() +
+        formData.firstName.slice(1),
+      lastName:
+        formData.lastName.charAt(0).toUpperCase() + formData.lastName.slice(1),
     };
 
     cookieStore.set("users", JSON.stringify(allUsers), {
