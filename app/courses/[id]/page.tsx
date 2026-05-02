@@ -1,6 +1,6 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+
 // lib
 import { getCourseById } from "@/lib/api";
 import { getCurrentUser } from "@/lib/auth";
@@ -10,6 +10,7 @@ import { Course } from "@/lib/filterCourses";
 
 // components
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 // icons
 import { CirclePlay, BookOpen, Clock, ChartColumn, Users } from "lucide-react";
@@ -40,6 +41,8 @@ const CoursePage = async ({ params }: CoursePageProps) => {
   const { id } = await params;
   const course: Course = await getCourseById(id);
   const user = await getCurrentUser();
+
+  const isEnrolled = (user?.enrolledCourses || []).includes(parseInt(id));
 
   const initials =
     `${course.instructor.split(" ")[0][0]}${course.instructor.split(" ")[1][0]}`.toUpperCase();
@@ -95,13 +98,22 @@ const CoursePage = async ({ params }: CoursePageProps) => {
             width={300}
             height={200}
           />
-          <Link
-            href={user?`/courses/${course.id}/checkout`:`/auth/login`}
-            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-2 px-4 rounded-sm text-center"
-          >
-            Enroll Now -{" "}
-            {course.price == 0 ? "Free" : `$${course.price.toFixed(2)}`}
-          </Link>
+          {!isEnrolled ? (
+            <Link
+              href={user ? `/courses/${course.id}/checkout` : `/auth/login`}
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-2 px-4 rounded-sm text-center"
+            >
+              Enroll Now -{" "}
+              {course.price == 0 ? "Free" : `$${course.price.toFixed(2)}`}
+            </Link>
+          ) : (
+            <Button
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-2 px-4 rounded-sm text-center"
+              disabled={true}
+            >
+              Already Enrolled
+            </Button>
+          )}
         </aside>
       </div>
       {/* course content */}
@@ -112,13 +124,23 @@ const CoursePage = async ({ params }: CoursePageProps) => {
             Course Content (12 Lessons)
           </h4>
           <LessonsList />
-          <Link
-            href={`/courses/${course.id}/quiz`}
-            className="flex items-center gap-4 p-4 border-2 border-border rounded-sm hover:bg-secondary hover:text-secondary-foreground hover:scale-105 transition-all duration-300 cursor-pointer"
-          >
-            <CirclePlay className="size-6 text-primary" />
-            Quiz
-          </Link>
+          {!isEnrolled ? (
+            <Link
+              href={`/courses/${course.id}`}
+              className="flex items-center gap-4 p-4 border-2 border-border rounded-sm hover:bg-secondary hover:text-secondary-foreground hover:scale-105 transition-all duration-300 cursor-not-allowed"
+            >
+              <CirclePlay className="size-6 text-primary" />
+              Quiz
+            </Link>
+          ) : (
+            <Link
+              href={`/courses/${course.id}/quiz`}
+              className="flex items-center gap-4 p-4 border-2 border-border rounded-sm hover:bg-secondary hover:text-secondary-foreground hover:scale-105 transition-all duration-300 cursor-pointer"
+            >
+              <CirclePlay className="size-6 text-primary" />
+              Quiz
+            </Link>
+          )}
         </section>
         <aside className="flex flex-col gap-4 border-2 border-border p-6 h-38 w-full md:w-sm rounded-lg mb-8 lg:mb-0 mt-8 md:mt-0">
           {/* instructor details */}
