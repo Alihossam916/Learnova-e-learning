@@ -13,22 +13,16 @@ export async function updateUserDashboard(course: Course) {
   if (!sessionToken) return { success: false, error: "Not authenticated" };
 
   const sessions = cookieStore.get("sessions");
-  const allSessions = sessions ? JSON.parse(sessions.value) : [];
-
-  const sessionIndex = allSessions.findIndex(
-    (s: { id: string }) => s.id === sessionToken,
-  );
-
-  if (sessionIndex === -1)
-    return { success: false, error: "Session not found" };
+  const session = sessions ? JSON.parse(sessions.value) : [];
 
   // Update session data
-  allSessions[sessionIndex] = {
-    ...allSessions[sessionIndex],
-    enrolledCourses: [course.id],
+  const currentEnrolled = session[0].enrolledCourses || [];
+  session[0] = {
+    ...session[0],
+    enrolledCourses: [...currentEnrolled, course.id],
   };
 
-  cookieStore.set("sessions", JSON.stringify(allSessions), {
+  cookieStore.set("sessions", JSON.stringify(session), {
     expires: expiresIn,
     httpOnly: true,
     secure: true,
@@ -39,13 +33,14 @@ export async function updateUserDashboard(course: Course) {
   const allUsers = users ? JSON.parse(users.value) : [];
 
   const userIndex = allUsers.findIndex(
-    (u: { id: string }) => u.id === allSessions[sessionIndex].userId,
+    (u: { id: string }) => u.id === session[0].userId,
   );
 
   if (userIndex !== -1) {
+    const currentUserEnrolled = allUsers[userIndex].enrolledCourses || [];
     allUsers[userIndex] = {
       ...allUsers[userIndex],
-      enrolledCourses: [course.id],
+      enrolledCourses: [...currentUserEnrolled, course.id],
     };
 
     cookieStore.set("users", JSON.stringify(allUsers), {
