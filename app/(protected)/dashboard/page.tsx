@@ -20,7 +20,7 @@ import { getCourseById } from "@/lib/api";
 
 const Dashboard = async () => {
   const user = await getCurrentUser();
-  
+
   if (!user) {
     redirect("/auth/login");
   }
@@ -109,7 +109,7 @@ const Dashboard = async () => {
                 </Button>
               </Link>
             </div>
-            {user.enrolledCourses ? (
+            {user.enrolledCourses.length > 0 ? (
               <article className="flex items-center p-16 border-2 border-border">
                 {enrolledCourses.map((course: Course) => (
                   <CoursesCard course={course} key={course.id} />
