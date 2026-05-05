@@ -1,4 +1,7 @@
-"use client";
+import Image from "next/image";
+import Link from "next/link";
+
+// components
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -8,9 +11,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Image from "next/image";
-import Link from "next/link";
+
+// icons
 import { BookOpen, Clock, Star } from "lucide-react";
+
+// lib
+import { getCurrentUser } from "@/lib/auth";
 
 interface CourseCardProps {
   id: number;
@@ -31,7 +37,11 @@ interface CourseProps {
   course: CourseCardProps;
 }
 
-export function CoursesCard({ course }: CourseProps) {
+export async function CoursesCard({ course }: CourseProps) {
+  const user = await getCurrentUser();
+
+  const isEnrolled = (user?.enrolledCourses || []).includes(course.id);
+
   return (
     <Link
       href={`/courses/${course.id}`}
@@ -82,11 +92,13 @@ export function CoursesCard({ course }: CourseProps) {
             </div>
           </CardContent>
         </CardHeader>
-        <CardFooter>
-          <p className="font-bold text-xl">
-            {course.price === 0 ? "Free" : `$${course.price}`}
-          </p>
-        </CardFooter>
+        {!isEnrolled ? (
+          <CardFooter>
+            <p className="font-bold text-xl">
+              {course.price === 0 ? "Free" : `$${course.price}`}
+            </p>
+          </CardFooter>
+        ) : null}
       </Card>
     </Link>
   );
