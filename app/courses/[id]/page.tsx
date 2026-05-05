@@ -125,13 +125,12 @@ const CoursePage = async ({ params }: CoursePageProps) => {
           </h4>
           <LessonsList />
           {!isEnrolled ? (
-            <Link
-              href={`/courses/${course.id}`}
+            <button
               className="flex items-center gap-4 p-4 border-2 border-border rounded-sm hover:bg-secondary hover:text-secondary-foreground hover:scale-105 transition-all duration-300 cursor-not-allowed"
             >
               <CirclePlay className="size-6 text-primary" />
               Quiz
-            </Link>
+            </button>
           ) : (
             <Link
               href={`/courses/${course.id}/quiz`}
