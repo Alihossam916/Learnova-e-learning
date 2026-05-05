@@ -68,14 +68,14 @@ const Dashboard = async () => {
             <div className="flex items-center gap-4 border-border border-2 rounded-sm p-8">
               <BookOpen className="size-10 p-2 text-primary bg-primary/20 rounded-sm" />
               <div className="flex flex-col">
-                <div className="font-bold text-2xl">0</div>
+                <div className="font-bold text-2xl">{user.enrolledCourses.length}</div>
                 <div className="text-muted-foreground text-sm">Enrolled</div>
               </div>
             </div>
             <div className="flex items-center gap-4 border-border border-2 rounded-sm p-8">
               <TrendingUp className="size-10 p-2 text-chart-4 bg-chart-4/20 rounded-sm" />
               <div className="flex flex-col">
-                <div className="font-bold text-2xl">0</div>
+                <div className="font-bold text-2xl">{user.enrolledCourses.length}</div>
                 <div className="text-muted-foreground text-sm">In Progress</div>
               </div>
             </div>
@@ -110,7 +110,7 @@ const Dashboard = async () => {
               </Link>
             </div>
             {user.enrolledCourses.length > 0 ? (
-              <article className="flex items-center p-16 border-2 border-border">
+              <article className="flex flex-wrap items-center gap-5 p-16 border-2 border-border">
                 {enrolledCourses.map((course: Course) => (
                   <CoursesCard course={course} key={course.id} />
                 ))}
