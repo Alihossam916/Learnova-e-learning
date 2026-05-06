@@ -108,8 +108,7 @@ const CoursePage = async ({ params }: CoursePageProps) => {
             </Link>
           ) : (
             <Button
-              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-2 px-4 rounded-sm text-center"
-              disabled={true}
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 p-4 rounded-sm text-center cursor-not-allowed"
             >
               Already Enrolled
             </Button>
