@@ -18,6 +18,7 @@ interface User {
   password: string;
   role: string;
   enrolledCourses?: string[];
+  createdCourses?: string[];
 }
 
 export async function signUp(formData: FormData) {
@@ -38,6 +39,8 @@ export async function signUp(formData: FormData) {
 
   if (role == "learn") {
     newUser.enrolledCourses = [];
+  } else if (role == "teach") {
+    newUser.createdCourses = [];
   }
 
   // Retrieve existing users from cookies, or initialize an empty array if none exist
