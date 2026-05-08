@@ -36,7 +36,7 @@ const Footer = () => {
             </li>
             <li>
               <Link
-                href="/auth/sign-up?role=student"
+                href="/auth/sign-up?role=learn"
                 className="text-sm text-muted-foreground cursor-pointer hover:text-primary transition-colors duration-200"
               >
                 Become a Student
@@ -44,7 +44,7 @@ const Footer = () => {
             </li>
             <li>
               <Link
-                href="/auth/sign-up?role=instructor"
+                href="/auth/sign-up?role=teach"
                 className="text-sm text-muted-foreground cursor-pointer hover:text-primary transition-colors duration-200"
               >
                 Teach on Learnova
@@ -67,10 +67,10 @@ const Footer = () => {
             </li>
             <li>
               <Link
-                href="/courses?category=data-science"
+                href="/courses?category=databases"
                 className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
               >
-                Data Science
+                Databases
               </Link>
             </li>
             <li>
