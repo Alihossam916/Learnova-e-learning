@@ -10,16 +10,18 @@ export async function updateUserDashboard(course: Course) {
   const cookieStore = await cookies();
   const sessionToken = cookieStore.get("sessionToken")?.value;
 
+  // validate authentication
   if (!sessionToken) return { success: false, error: "Not authenticated" };
 
+  // retrieve authentication data
   const sessions = cookieStore.get("sessions");
   const session = sessions ? JSON.parse(sessions.value) : [];
 
   // Update session data
-  const currentEnrolled = session[0].enrolledCourses || [];
+  const currentlyEnrolled = session[0].enrolledCourses || [];
   session[0] = {
     ...session[0],
-    enrolledCourses: [...currentEnrolled, course.id],
+    enrolledCourses: [...currentlyEnrolled, course.id],
   };
 
   cookieStore.set("sessions", JSON.stringify(session), {
@@ -32,11 +34,13 @@ export async function updateUserDashboard(course: Course) {
   const users = cookieStore.get("users");
   const allUsers = users ? JSON.parse(users.value) : [];
 
+  // find current user
   const userIndex = allUsers.findIndex(
     (u: { id: string }) => u.id === session[0].userId,
   );
 
   if (userIndex !== -1) {
+    // update user's data
     const currentUserEnrolled = allUsers[userIndex].enrolledCourses || [];
     allUsers[userIndex] = {
       ...allUsers[userIndex],
