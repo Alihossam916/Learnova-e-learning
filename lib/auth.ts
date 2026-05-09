@@ -36,10 +36,9 @@ export async function signUp(formData: FormData) {
     password: hashedPassword,
     role,
   };
+  newUser.enrolledCourses = [];
 
-  if (role == "learn") {
-    newUser.enrolledCourses = [];
-  } else if (role == "teach") {
+  if (role == "teach") {
     newUser.createdCourses = [];
   }
 
