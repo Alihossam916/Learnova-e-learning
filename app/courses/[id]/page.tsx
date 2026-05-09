@@ -4,6 +4,7 @@ import Link from "next/link";
 // lib
 import { getCourseById } from "@/lib/api";
 import { getCurrentUser } from "@/lib/auth";
+import { enrollCourse } from "@/lib/enrollCourse";
 
 // types
 import { Course } from "@/lib/filterCourses";
@@ -99,20 +100,25 @@ const CoursePage = async ({ params }: CoursePageProps) => {
             height={200}
           />
           {!isEnrolled ? (
-            <Link
-              href={user ? `/courses/${course.id}/checkout` : `/auth/login`}
-              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-2 px-4 rounded-sm text-center"
-            >
-              Enroll Now -{" "}
-              {course.price == 0 ? "Free" : `$${course.price.toFixed(2)}`}
-            </Link>
+            <form action={enrollCourse} className="w-full">
+              <input
+                type="hidden"
+                name="course"
+                value={JSON.stringify(course)}
+              />
+              <button
+                type="submit"
+                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-2 px-4 rounded-sm text-center cursor-pointer"
+              >
+                Enroll Now -{" "}
+                {course.price == 0 ? "Free" : `$${course.price.toFixed(2)}`}
+              </button>
+            </form>
           ) : (
-            <Button
-              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 p-4 rounded-sm text-center cursor-not-allowed"
-            >
+            <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 p-4 rounded-sm text-center cursor-not-allowed">
               Already Enrolled
             </Button>
-          )}
+          )}{" "}
         </aside>
       </div>
       {/* course content */}
@@ -124,9 +130,7 @@ const CoursePage = async ({ params }: CoursePageProps) => {
           </h4>
           <LessonsList />
           {!isEnrolled ? (
-            <button
-              className="flex items-center gap-4 p-4 border-2 border-border rounded-sm hover:bg-secondary hover:text-secondary-foreground hover:scale-105 transition-all duration-300 cursor-not-allowed"
-            >
+            <button className="flex items-center gap-4 p-4 border-2 border-border rounded-sm hover:bg-secondary hover:text-secondary-foreground hover:scale-105 transition-all duration-300 cursor-not-allowed">
               <CirclePlay className="size-6 text-primary" />
               Quiz
             </button>
