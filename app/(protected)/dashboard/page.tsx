@@ -117,10 +117,13 @@ const Dashboard = async () => {
           {/* created courses */}
           <section className="space-y-2">
             <h3 className="text-xl font-bold">My Courses</h3>
-            {user.createdCourses?.length > 0 ? (
+            {user.createdCourses?.length > 0 ||
+            user.enrolledCourses?.length > 0 ? (
               <article className="flex flex-wrap justify-center xl:justify-between items-center gap-x-5 gap-y-10 p-12 border-2 border-border rounded-sm">
-                {/* replace the enrolled courses with created courses for instructor rule */}
-                {createdCourses.map((course: Course) => (
+                {createdCourses?.map((course: Course) => (
+                  <CoursesCard course={course} key={course.id} />
+                ))}
+                {enrolledCourses?.map((course: Course) => (
                   <CoursesCard course={course} key={course.id} />
                 ))}
               </article>

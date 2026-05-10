@@ -6,7 +6,6 @@ import { BookOpen } from "lucide-react";
 import { getCourses } from "@/lib/api";
 import { filterCourses } from "@/lib/filterCourses";
 
-
 interface CourseProps {
   id: number;
   title: string;
@@ -35,15 +34,17 @@ const CoursesSection = async ({ params }: CoursesSectionProps) => {
 
   const courses = await getCourses();
 
-const filteredCourses = filterCourses(courses, category, search);
+  const filteredCourses = filterCourses(courses, category, search);
 
   return (
     <section className="my-12">
       {filteredCourses.length > 0 ? (
         <div className="flex flex-wrap items-center justify-center gap-8 last:mr-auto">
-            {filteredCourses.map((course: CourseProps) => {
-              return <CoursesCard course={course} key={course.id} />;
-            })}
+          {filteredCourses.map((course: CourseProps) => {
+            return (
+              <CoursesCard course={course} showPrice={true} key={course.id} />
+            );
+          })}
         </div>
       ) : (
         <div className="flex flex-col items-center text-center p-16 sm:p-24 border-2 border-dotted border-border rounded-sm">

@@ -17,6 +17,7 @@ import { BookOpen, Clock, Star } from "lucide-react";
 
 // lib
 import { getCurrentUser } from "@/lib/auth";
+import React from "react";
 
 interface CourseCardProps {
   id: number;
@@ -35,9 +36,10 @@ interface CourseCardProps {
 }
 interface CourseProps {
   course: CourseCardProps;
+  showPrice?: boolean;
 }
 
-export async function CoursesCard({ course }: CourseProps) {
+export async function CoursesCard({ course, showPrice }: CourseProps) {
   const user = await getCurrentUser();
 
   const isEnrolled = (user?.enrolledCourses || []).includes(course.id);
@@ -92,7 +94,7 @@ export async function CoursesCard({ course }: CourseProps) {
             </div>
           </CardContent>
         </CardHeader>
-        {!isEnrolled ? (
+        {!isEnrolled || showPrice ? (
           <CardFooter>
             <p className="font-bold text-xl">
               {course.price === 0 ? "Free" : `$${course.price}`}
