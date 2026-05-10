@@ -39,7 +39,7 @@ const CoursesSection = async ({ params }: CoursesSectionProps) => {
   return (
     <section className="my-12">
       {filteredCourses.length > 0 ? (
-        <div className="flex flex-wrap items-center justify-center gap-8 last:mr-auto">
+        <div className="flex flex-wrap items-center justify-center gap-8">
           {filteredCourses.map((course: CourseProps) => {
             return (
               <CoursesCard course={course} showPrice={true} key={course.id} />
