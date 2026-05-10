@@ -42,7 +42,7 @@ const Dashboard = async () => {
   const createdCourses = await getCourseById(createdCoursesId);
 
   return (
-    <div className="flex flex-col px-8 sm:px-4 pb-8">
+    <div className="flex flex-col px-0 sm:px-4 pb-8">
       {user.role == "teach" ? (
         <div className="space-y-8">
           {/* instructor dashboard */}
@@ -119,7 +119,7 @@ const Dashboard = async () => {
             <h3 className="text-xl font-bold">My Courses</h3>
             {user.createdCourses?.length > 0 ||
             user.enrolledCourses?.length > 0 ? (
-              <article className="flex flex-wrap justify-center xl:justify-between items-center gap-x-5 gap-y-10 p-12 border-2 border-border rounded-sm">
+              <article className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] justify-items-center gap-x-5 gap-y-10 p-0 py-6 sm:p-12 border-2 border-border rounded-sm">
                 {createdCourses?.map((course: Course) => (
                   <CoursesCard course={course} key={course.id} />
                 ))}
@@ -209,7 +209,7 @@ const Dashboard = async () => {
               </Link>
             </div>
             {user.enrolledCourses?.length > 0 ? (
-              <article className="flex flex-wrap justify-center xl:justify-between items-center gap-x-5 gap-y-10 p-12 border-2 border-border rounded-sm">
+              <article className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] justify-items-center gap-x-5 gap-y-10 p-0 py-6 sm:p-12 border-2 border-border rounded-sm">
                 {enrolledCourses.map((course: Course) => (
                   <CoursesCard course={course} key={course.id} />
                 ))}

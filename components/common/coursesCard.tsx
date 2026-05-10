@@ -47,7 +47,7 @@ export async function CoursesCard({ course, showPrice }: CourseProps) {
   return (
     <Link
       href={`/courses/${course.id}`}
-      className="relative w-full max-w-sm hover:scale-105 hover:drop-shadow-2xl transition-all duration-200"
+      className="relative w-74 md:w-80 xl:w-full max-w-sm hover:scale-105 hover:drop-shadow-2xl transition-all duration-200"
     >
       <Card className="pt-0">
         <div className="absolute inset-0 z-30 aspect-video" />
