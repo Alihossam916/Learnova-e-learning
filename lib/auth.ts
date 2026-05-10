@@ -17,7 +17,7 @@ interface User {
   email: string;
   password: string;
   role: string;
-  enrolledCourses?: string[];
+  enrolledCourses: string[];
   createdCourses?: string[];
 }
 
@@ -35,8 +35,8 @@ export async function signUp(formData: FormData) {
     email,
     password: hashedPassword,
     role,
+    enrolledCourses: [],
   };
-  newUser.enrolledCourses = [];
 
   if (role == "teach") {
     newUser.createdCourses = [];
@@ -97,6 +97,7 @@ async function createSession(user: User) {
     role: user.role,
     createdAt: new Date(),
     enrolledCourses: user.enrolledCourses,
+    createdCourse: user.createdCourses,
   });
 
   // Store session in httpOnly cookie
