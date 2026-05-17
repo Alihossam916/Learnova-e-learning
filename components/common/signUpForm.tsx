@@ -67,7 +67,7 @@ const SignUpForm = () => {
           onChange={handleChange}
           placeholder="Enter your first name"
           className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground placeholder-muted-foreground"
-p        />
+        />
       </div>
 
       {/* Last Name */}
@@ -86,7 +86,7 @@ p        />
           onChange={handleChange}
           placeholder="Enter your last name"
           className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground placeholder-muted-foreground"
-p        />
+        />
       </div>
 
       {/* Email */}
@@ -105,7 +105,7 @@ p        />
           onChange={handleChange}
           placeholder="Enter your email address"
           className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground placeholder-muted-foreground"
-p        />
+        />
       </div>
 
       {/* Password */}
@@ -124,7 +124,7 @@ p        />
           onChange={handleChange}
           placeholder="Enter your password"
           className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground placeholder-muted-foreground"
-p        />
+        />
       </div>
 
       {/* Role Selection */}
