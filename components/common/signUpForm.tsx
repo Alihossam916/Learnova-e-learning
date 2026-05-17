@@ -5,10 +5,14 @@ import { useSearchParams, useRouter } from "next/navigation";
 // lib
 import { signUp } from "@/lib/auth";
 
+// store
+import { useNotificationStore } from "@/store/notificationStore";
+
 const SignUpForm = () => {
   const searchParams = useSearchParams();
   const role = searchParams.get("role");
   const router = useRouter();
+  const showNotification = useNotificationStore((s) => s.showNotification);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -33,16 +37,16 @@ const SignUpForm = () => {
     // basic validation
     const { firstName, lastName, email, password } = formData;
     if (!firstName || !lastName || !email || !password) {
-      alert("Please fill in all required fields.");
+      showNotification("error", "Please fill in all required fields.");
       return;
     }
     const result = await signUp(formData);
     if (!result.success) {
-      alert(result.error || "Error creating account. Please try again.");
+      showNotification("error", result.error || "Error creating account. Please try again.");
       return;
     }
-    alert("Account created successfully!");
-    router.push("/");
+    showNotification("success", "Account created successfully!");
+    router.ush("/");
   };
 
   return (
@@ -63,7 +67,6 @@ const SignUpForm = () => {
           onChange={handleChange}
           placeholder="Enter your first name"
           className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground placeholder-muted-foreground"
-          required
         />
       </div>
 
@@ -83,7 +86,6 @@ const SignUpForm = () => {
           onChange={handleChange}
           placeholder="Enter your last name"
           className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground placeholder-muted-foreground"
-          required
         />
       </div>
 
@@ -103,7 +105,6 @@ const SignUpForm = () => {
           onChange={handleChange}
           placeholder="Enter your email address"
           className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground placeholder-muted-foreground"
-          required
         />
       </div>
 
@@ -123,7 +124,6 @@ const SignUpForm = () => {
           onChange={handleChange}
           placeholder="Enter your password"
           className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground placeholder-muted-foreground"
-          required
         />
       </div>
 

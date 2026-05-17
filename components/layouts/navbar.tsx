@@ -13,6 +13,7 @@ import { signOut } from "@/lib/auth";
 // stores
 import { useAuthStore } from "@/store/authStore";
 import { useMobileMenuStore } from "@/store/mobileMenuStore";
+import { useNotificationStore } from "@/store/notificationStore";
 
 // shadcn ui imports
 import { Button } from "@/components/ui/button";
@@ -30,13 +31,15 @@ const Navbar = () => {
   const { user } = useAuthStore(); // Access the user state from authStore
   const { isMobileMenuOpen, setIsMobileMenuOpen } = useMobileMenuStore(); // Access mobile menu state and setter from the store
 
+  const showNotification = useNotificationStore((s) => s.showNotification);
+
   const handleSignOut = async () => {
     const result = await signOut();
     if (!result.success) {
-      alert("Error signing out. Please try again.");
+      showNotification("error", "Error signing out. Please try again.");
       return;
     }
-    alert("Signed out successfully.");
+    showNotification("success", "Signed out successfully.");
   };
 
   // Get initials from name e.g. "Ahmed Hassan" → "AH"

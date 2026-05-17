@@ -8,6 +8,9 @@ import { BookOpen } from "lucide-react";
 // lib
 import { signIn } from "@/lib/auth";
 
+// store
+import { useNotificationStore } from "@/store/notificationStore";
+
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -15,6 +18,7 @@ const Login = () => {
   });
 
   const router = useRouter();
+  const showNotification = useNotificationStore((s) => s.showNotification);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -28,15 +32,15 @@ const Login = () => {
     e.preventDefault();
     const { email, password } = formData;
     if (!email || !password) {
-      alert("Please fill in all required fields.");
+      showNotification("error", "Please fill in all required fields.");
       return;
     }
     const result = await signIn(email, password);
     if (!result.success) {
-      alert(result.error || "Error signing in. Please try again.");
+      showNotification("error", result.error || "Error signing in. Please try again.");
       return;
     }
-    alert("Login successful!");
+    showNotification("success", "Login successful!");
     router.push("/");
   };
 
@@ -74,7 +78,6 @@ const Login = () => {
                 onChange={handleChange}
                 placeholder="Enter your email address"
                 className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground placeholder-muted-foreground"
-                required
               />
             </div>
 
@@ -93,7 +96,6 @@ const Login = () => {
                 onChange={handleChange}
                 placeholder="Enter your password"
                 className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground placeholder-muted-foreground"
-                required
               />
             </div>
 

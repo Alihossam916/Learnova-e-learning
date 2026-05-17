@@ -14,8 +14,12 @@ import { CreditCard } from "lucide-react";
 import { processPayment } from "@/lib/mockPayment";
 import { updateUserDashboard } from "@/lib/updateDashboard";
 
+// store
+import { useNotificationStore } from "@/store/notificationStore";
+
 const CheckoutForm = ({ course }: { course: Course }) => {
   const router = useRouter();
+  const showNotification = useNotificationStore((s) => s.showNotification);
 
   const [cardHolder, setCardHolder] = useState("");
   const [cardNumber, setCardNumber] = useState("");
@@ -64,10 +68,10 @@ const CheckoutForm = ({ course }: { course: Course }) => {
     // verify payment proccess
     const result = await processPayment(formDetails);
     if (result.success == false) {
-      alert(result.error);
+      showNotification("error", result.error || "Payment failed. Please try again.");
     } else {
       await updateUserDashboard(course);
-      alert(`Successful Transaction: ${result.transactionId}`);
+      showNotification("success", `Successful Transaction: ${result.transactionId || "N/A"}`);
       router.push("/dashboard");
     }
   };

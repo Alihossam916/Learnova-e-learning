@@ -7,6 +7,7 @@ import SideNavbar from "@/components/layouts/sideNavbar";
 import Footer from "@/components/layouts/footer";
 import MainContent from "@/components/layouts/mainContent";
 import { ModeToggle } from "@/components/common/theme-button";
+import { Notification } from "@/components/common/notification";
 
 // lib
 import { getCurrentUser } from "@/lib/auth";
@@ -58,6 +59,7 @@ export default async function RootLayout({
             </MainContent>
           </AuthProvider>
           <ModeToggle />
+          <Notification />
         </ThemeProvider>
       </body>
     </html>
