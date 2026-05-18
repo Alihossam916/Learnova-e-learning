@@ -17,11 +17,15 @@ export async function processPayment(
 ): Promise<PaymentResponse> {
   // Simulate network delay
   await new Promise((resolve) => setTimeout(resolve, 1500));
+  
+  const expiryDate = paymentDetails.expiry.split("/");
 
   // Mock validation
   if (
     paymentDetails.cardNumber.length === 16 &&
-    paymentDetails.cvv.length === 3
+    paymentDetails.cvv.length === 3 &&
+    parseInt(expiryDate[0]) <= 12 &&
+    parseInt(expiryDate[1]) <= 50 
   ) {
     // Success card
     return {
