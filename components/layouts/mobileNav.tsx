@@ -39,7 +39,8 @@ const MobileNav = () => {
             <li>
               <Link
                 href="/"
-                className="text-lg font-semibold text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block w-full text-lg font-semibold text-foreground rounded-[7px] p-2 focus:bg-primary/30 hover:text-primary transition-colors duration-200 cursor-pointer"
               >
                 Home
               </Link>
@@ -47,7 +48,8 @@ const MobileNav = () => {
             <li>
               <Link
                 href="/courses"
-                className="text-lg font-semibold text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block w-full text-lg font-semibold text-foreground rounded-[7px] p-2 focus:bg-primary/30 hover:text-primary transition-colors duration-200 cursor-pointer"
               >
                 Courses
               </Link>
@@ -56,7 +58,8 @@ const MobileNav = () => {
               <li>
                 <Link
                   href="/dashboard"
-                  className="text-lg font-semibold text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block w-full text-lg font-semibold text-foreground rounded-[7px] p-2 focus:bg-primary/30 hover:text-primary transition-colors duration-200 cursor-pointer"
                 >
                   Dashboard
                 </Link>
@@ -67,7 +70,8 @@ const MobileNav = () => {
                 <li>
                   <Link
                     href="/auth/login"
-                    className="text-lg font-semibold text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block w-full text-lg font-semibold text-foreground rounded-[7px] p-2 focus:bg-primary/30 hover:text-primary transition-colors duration-200 cursor-pointer"
                   >
                     Sign In
                   </Link>
