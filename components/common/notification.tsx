@@ -12,10 +12,10 @@ const iconMap = {
 };
 
 const colorMap = {
-  success: "border-chart-3 bg-chart-3/20",
-  error: "border-destructive bg-destructive/20",
-  warning: "border-chart-5 bg-chart-5/20",
-  info: "border-primary bg-primary/20",
+  success: "border-chart-3 bg-notification-success",
+  error: "border-destructive bg-notification-error",
+  warning: "border-chart-5 bg-notification-warning",
+  info: "border-primary bg-notification-info",
 };
 
 const iconColorMap = {
