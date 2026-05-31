@@ -49,7 +49,7 @@ const FeaturedCourses = async () => {
         <div className="flex flex-wrap items-center justify-center gap-8 last:mr-auto">
           <Suspense fallback={<Spinner className="size-12" />}>
             {featuredCourses.map((course: CourseProps) => {
-              return <CoursesCard course={course} key={course.id} />;
+              return <CoursesCard course={course} showPrice={true} key={course.id} />;
             })}
           </Suspense>
         </div>
